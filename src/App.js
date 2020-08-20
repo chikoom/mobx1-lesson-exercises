@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { observer } from 'mobx-react'
-import './App.css';
-import Item from './components/Item';
-
+import './App.css'
+import Item from './components/Item'
 
 @observer
 class App extends Component {
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
-      newItem: e.target.value
+      newItem: e.target.value,
     })
   }
   addItem = () => {
@@ -16,15 +15,15 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <input onChange = {this.handleChange}/>
-        <button onClick = {this.addItem}>Add</button>
-      {/* your code here
-          You should map each grocery item into an Item component  
-      */}  
+      <div className='App'>
+        <input onChange={this.handleChange} />
+        <button onClick={this.addItem}>Add</button>
+        {this.props.store.list.map(item => (
+          <Item item={item} store={this.props.store} />
+        ))}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
